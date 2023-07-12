@@ -1,8 +1,25 @@
 package com.project.professor.allocation.entity;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+<<<<<<< Updated upstream:src/main/java/com/project/professor/allocation/entity/Course.java
 public class Course {
+=======
+@Entity
+@Table(name = "Curso")
+public class Curso {
+>>>>>>> Stashed changes:src/main/java/com/project/professor/allocation/entity/Curso.java
 	
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
 	private Long id;
+
+	@Column(name = "name", nullable = false)
 	private String name;
 
 	public Long getId() {
