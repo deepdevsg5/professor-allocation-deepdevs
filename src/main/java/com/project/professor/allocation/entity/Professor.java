@@ -1,27 +1,27 @@
 package com.project.professor.allocation.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
-@Table(name = "Professor")
 public class Professor {
 
-	@Column(name = "nome")
-	private String nome;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String name;
 	
-	@Column(name = "cpf")
+	@Column(unique = true, nullable = false)
 	private String cpf;
 
-	@Column(name = "id")
-	private Long id;
-
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setNome(String name) {
+		this.name = name;
 	}
 
 	public String getCpf() {
