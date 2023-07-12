@@ -6,13 +6,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-<<<<<<< Updated upstream:src/main/java/com/project/professor/allocation/entity/Course.java
-public class Course {
-=======
+
 @Entity
-@Table(name = "Curso")
-public class Curso {
->>>>>>> Stashed changes:src/main/java/com/project/professor/allocation/entity/Curso.java
+@Table(name = "Course")
+public class Course {
+
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
