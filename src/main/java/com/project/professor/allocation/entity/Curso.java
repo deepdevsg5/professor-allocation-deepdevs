@@ -1,7 +1,7 @@
 package com.project.professor.allocation.entity;
 
 public class Curso {
-	//Fiz essa Alteraçao
+	
 	private Long id;
 	private String name;
 
