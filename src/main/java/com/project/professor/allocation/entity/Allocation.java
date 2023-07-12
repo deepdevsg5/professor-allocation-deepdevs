@@ -3,28 +3,26 @@ package com.project.professor.allocation.entity;
 import java.sql.Time;
 import java.time.DayOfWeek;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
-@Table(name="allocation")
 public class Allocation {
 	
 	@Id
-	@Column(name = "idLong")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idLong;
 
-	@Enumerated(EnumType.STRING)
-    @Column(name = "dayOfWeek", nullable = false)
+	@Column(name = "DayOfWeek", nullable = false)
 	private DayOfWeek dayOfWeek;
 
-	
-	@Temporal(TemporalType.TIME)
-    @Column(name = "hourStart", nullable = false)
+	@Column(name = "hourStart", nullable = false)
 	private Time hourStart;
 
-	@Temporal(TemporalType.TIME)
-    @Column(name = "hourEndTime", nullable = false)
+	@Column(name = "hourEndTime", nullable = false)
 	private Time hourEndTime;
 
 	public Long getIdLong() {
