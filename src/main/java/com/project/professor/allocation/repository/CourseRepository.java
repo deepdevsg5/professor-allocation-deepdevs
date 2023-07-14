@@ -9,3 +9,5 @@ import com.project.professor.allocation.entity.Course;
 public interface CourseRepository extends JpaRepository<Course,Long>{
 
 }
+
+//Jacobe Apaga aqui
