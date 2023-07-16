@@ -16,8 +16,6 @@ public class Department {
 
 	@Column(name = "name", nullable = false)
 	private String name;
-
-	@ManyToOne(optional = false)
 	
 	public Long getId() {
 		return id;

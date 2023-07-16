@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.TestPropertySource;
 
+import com.project.professor.allocation.entity.Department;
 import com.project.professor.allocation.entity.Professor;
 
 @DataJpaTest
@@ -38,12 +39,16 @@ public class ProfessorRepositoryTest {
 
 	@Test
 	public void create() {
-
+		
+		Department dpt = new Department();
+		dpt.setId(1l);
+		dpt.setName("TesteProfessor");
+		
 		Professor professor = new Professor();
 		professor.setId(null);
 		professor.setName("Professor Antônio");
-		professor.setCpf("111.111.111-11");
-		professor.setDepartment(null);
+		professor.setCpf("111.111.111-13");
+		professor.setDepartment(dpt);
 		professor = professorRepository.save(professor);
 		System.out.println(professor);
 	}
