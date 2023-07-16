@@ -31,7 +31,7 @@ public class AllocationRepositoryTest {
 		Professor professor = new Professor();
 		professor.setCpf("0123456");
 		professor.setId(1l);
-		professor.setNome("Carlos");
+		professor.setName("Carlos");
 
 		Course course = new Course();
 		course.setId(1l);
@@ -54,7 +54,7 @@ public class AllocationRepositoryTest {
 		Professor professor = new Professor();
 		professor.setCpf("0123456");
 		professor.setId(1l);
-		professor.setNome("Carlos");
+		professor.setName("Carlos");
 
 		Course course = new Course();
 		course.setId(1l);
