@@ -93,6 +93,20 @@ public class AllocationRepositoryTest {
 		System.out.println(alloc);
 
 	}
+	
+	@Test
+	void findByProfessorId() {
+		Long idProf =1l; 
+		List<Allocation> findProfAllocations = allocationRepository.findByProfessorId(idProf);
+		System.out.println(findProfAllocations);
+	}
+	@Test
+	void findByCourseId() {
+		Long idCourse =1l; 
+		List<Allocation> findCourse = allocationRepository.findByCourseId(idCourse);
+		System.out.println(findCourse);
+	}
+	
 
 	@Test
 	void deleteById() {
