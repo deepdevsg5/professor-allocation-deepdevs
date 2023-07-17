@@ -8,13 +8,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Allocation {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idLong;
+	private Long id;
 
 	@Column(name = "DayOfWeek", nullable = false)
 	private DayOfWeek dayOfWeek;
@@ -24,13 +26,21 @@ public class Allocation {
 
 	@Column(name = "hourEndTime", nullable = false)
 	private Time hourEndTime;
+	
+	@ManyToOne(optional = false)
+	@JoinColumn(nullable = false)
+	private Professor professor;
+	
+	@ManyToOne(optional = false)
+	@JoinColumn(nullable = false)
+	private Course course;
 
-	public Long getIdLong() {
-		return idLong;
+	public Long getId() {
+		return id;
 	}
 
-	public void setIdLong(Long idLong) {
-		this.idLong = idLong;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public DayOfWeek getDayOfWeek() {
@@ -56,5 +66,35 @@ public class Allocation {
 	public void setHourEndTime(Time hourEndTime) {
 		this.hourEndTime = hourEndTime;
 	}
+
+	public Professor getProfessor() {
+		return professor;
+	}
+
+	public void setProfessor(Professor professor) {
+		this.professor = professor;
+	}
+
+	public Course getCourse() {
+		return course;
+	}
+
+	public void setCourse(Course course) {
+		this.course = course;
+	}
+	
+	@Override
+    public String toString() {
+        return "Allocation { " +
+                "	 Id : " + id +
+                "\n Day Of Week :" + dayOfWeek +
+                "\n Start Hour :" + hourStart +
+                "\n  End Hour:" + hourEndTime +
+                "\n  Professor: " + professor +
+                "\n  Course: " + course +
+                '}';
+    }
+	
+	
 
 }

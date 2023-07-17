@@ -5,9 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Departament {
+public class Department {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,7 +16,7 @@ public class Departament {
 
 	@Column(name = "name", nullable = false)
 	private String name;
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -30,6 +31,12 @@ public class Departament {
 
 	public void setName(String name) {
 		this.name = name;
+	
+	}
+
+	@Override
+	public String toString() {
+		return "Department [id=" + id + ", name=" + name + "]";
 	}
 
 }

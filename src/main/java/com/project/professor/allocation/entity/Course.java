@@ -6,8 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+
 @Entity
 public class Course {
+
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,6 +32,11 @@ public class Course {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return "Course [id=" + id + ", name=" + name + "]";
 	}
 
 }
