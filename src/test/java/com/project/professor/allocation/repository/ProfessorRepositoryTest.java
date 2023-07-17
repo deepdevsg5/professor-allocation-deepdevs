@@ -24,6 +24,22 @@ public class ProfessorRepositoryTest {
 	ProfessorRepository professorRepository;
 
 	@Test
+	public void create() {
+
+		Department dpt = new Department();
+		dpt.setId(1l);
+		dpt.setName("TesteProfessor");
+
+		Professor professor = new Professor();
+		professor.setId(null);
+		professor.setName("Marcos");
+		professor.setCpf("11111111113");
+		professor.setDepartment(dpt);
+		professor = professorRepository.save(professor);
+		System.out.println(professor);
+	}
+
+	@Test
 	public void findAll() {
 		List<Professor> professors = professorRepository.findAll();
 		System.out.println(professors);
@@ -38,19 +54,24 @@ public class ProfessorRepositoryTest {
 	}
 
 	@Test
-	public void create() {
-		
-		Department dpt = new Department();
-		dpt.setId(1l);
-		dpt.setName("TesteProfessor");
-		
-		Professor professor = new Professor();
-		professor.setId(null);
-		professor.setName("Professor Antônio");
-		professor.setCpf("111.111.111-13");
-		professor.setDepartment(dpt);
-		professor = professorRepository.save(professor);
-		System.out.println(professor);
+	public void findByNameContaining() {
+		String name = "Marcos";
+		List<Professor> nameProfessor = professorRepository.findByNameContaining(name);
+		System.out.println(nameProfessor);
+	}
+
+	@Test
+	public void findByCpfEquals() {
+		String cpfNumber = "11111111113";
+		List<Professor> findCpf = professorRepository.findByCpfEquals(cpfNumber);
+		System.out.println(findCpf);
+	}
+
+	@Test
+	public void findByDepartmentId() {
+		Long id = 1l;
+		List<Professor> dptId = professorRepository.findByDepartmentId(id);
+		System.out.println(dptId);
 	}
 
 	@Test
