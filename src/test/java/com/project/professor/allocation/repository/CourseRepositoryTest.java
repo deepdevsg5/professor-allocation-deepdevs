@@ -21,11 +21,17 @@ public class CourseRepositoryTest {
 
 	@Autowired
 	CourseRepository courseRepository;
-
+	
+	@Test
+	 void findByName() {
+		List<Course> courses = courseRepository.findByNameContaining("logica");
+		System.out.println(courses);
+	 }
+	
 	@Test
 	void create() {
 		Course cur1 = new Course();
-		cur1.setName("Logica");
+		cur1.setName("matematica");
 		cur1.setId(null);
 
 		Course cur2 = courseRepository.save(cur1);
@@ -70,5 +76,6 @@ public class CourseRepositoryTest {
 	@Test
 	void deleteAll() {
 		courseRepository.deleteAllInBatch();
+	}	
 	}
-}
+	
