@@ -1,17 +1,45 @@
 package com.project.professor.allocation.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+
+@Entity
 public class Professor {
 
-	private String nome;
-	private String cpf;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	public String getNome() {
-		return nome;
+	@Column(name = "name", nullable = false)
+	private String name;
+
+	@Column(name = "cpf", unique = true, nullable = false)
+	private String cpf;
+
+	@ManyToOne(optional = false)
+	@JoinColumn(nullable = false)
+	private Department department;
+
+	public Long getId() {
+		return id;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getCpf() {
@@ -22,11 +50,17 @@ public class Professor {
 		this.cpf = cpf;
 	}
 
-	public Long getId() {
-		return id;
+	public Department getDepartment() {
+		return department;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setDepartment(Department department) {
+		this.department = department;
 	}
+
+	@Override
+	public String toString() {
+		return "Professor [id=" + id + ", name=" + name + ", cpf=" + cpf + ", department=" + department + "]";
+	}
+
 }
