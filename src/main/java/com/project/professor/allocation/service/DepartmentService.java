@@ -6,16 +6,19 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.project.professor.allocation.entity.Department;
+import com.project.professor.allocation.entity.Professor;
 import com.project.professor.allocation.repository.DepartmentRepository;
+import com.project.professor.allocation.repository.ProfessorRepository;
 
 @Service
 public class DepartmentService {
 
 	private DepartmentRepository repo;
+	private ProfessorRepository profRepo;
 
-	public DepartmentService(DepartmentRepository repo) {
-
+	public DepartmentService(DepartmentRepository repo, ProfessorRepository profRepo) {
 		this.repo = repo;
+		this.profRepo = profRepo;
 
 	}
 
@@ -54,9 +57,18 @@ public class DepartmentService {
 			repo.deleteById(id);
 		}
 	}
-	
+
 	public void deleteAll() {
 		repo.deleteAllInBatch();
-		
+
+	}
+
+	private Department saveInternal(Department department) {
+		department = repo.save(department);
+
+		List<Professor> professors = profRepo.findByDepartmentId(department.getId());
+		department.setProfessors(professors);
+
+		return department;
 	}
 }

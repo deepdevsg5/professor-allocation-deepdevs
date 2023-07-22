@@ -1,11 +1,13 @@
 package com.project.professor.allocation.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Department {
@@ -16,7 +18,10 @@ public class Department {
 
 	@Column(name = "name", nullable = false)
 	private String name;
-	
+
+	@OneToMany
+	private List<Professor> professors;
+
 	public Long getId() {
 		return id;
 	}
@@ -31,12 +36,16 @@ public class Department {
 
 	public void setName(String name) {
 		this.name = name;
-	
+
+	}
+
+	public void setProfessors(List<Professor> professors) {
+		this.professors = professors;
+
 	}
 
 	@Override
 	public String toString() {
 		return "Department [id=" + id + ", name=" + name + "]";
 	}
-
 }
