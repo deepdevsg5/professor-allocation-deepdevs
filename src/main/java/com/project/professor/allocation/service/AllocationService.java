@@ -34,9 +34,9 @@ public class AllocationService {
 
 	public List<Allocation> findAll() {
 
-		List<Allocation> listaDeAllocations = repo.findAll();
+		List<Allocation> listAllocations = repo.findAll();
 
-		return listaDeAllocations;
+		return listAllocations;
 	}
 
 	public Allocation create(Allocation allocation) {
@@ -49,9 +49,9 @@ public class AllocationService {
 
 	public Allocation udpate(Allocation allocation) {
 
-		Long alloId = allocation.getId();
+		Long allocationId = allocation.getId();
 
-		if (repo.existsById(alloId)) {
+		if (repo.existsById(allocationId)) {
 
 			return saveInternal(allocation);
 
