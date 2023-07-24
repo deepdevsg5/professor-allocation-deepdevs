@@ -19,7 +19,6 @@ import com.project.professor.allocation.service.DepartmentService;
 
 @RestController
 @RequestMapping(path = "/departments")
-
 public class DepartmentController {
 
 	private DepartmentService departmentService;
