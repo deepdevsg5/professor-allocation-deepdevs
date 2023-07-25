@@ -36,7 +36,6 @@ public class ProfessorController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Professor> create(@RequestBody Professor professor) {
         try {
             Professor createdProfessor = professorService.create(professor);

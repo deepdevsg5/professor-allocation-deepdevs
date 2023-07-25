@@ -68,8 +68,10 @@ public class AllocationController {
 		}
 
 	}
-	@PutMapping(path = "/{allocation_id}",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Allocation> update(@PathVariable(name ="allocation_id")Long id, @RequestBody Allocation allocation) { 
+
+	@PutMapping(path = "/{allocation_id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Allocation> update(@PathVariable(name = "allocation_id") Long id,
+			@RequestBody Allocation allocation) {
 		try {
 			allocation.setId(id);
 			allocation = allocationService.udpate(allocation);
@@ -87,18 +89,17 @@ public class AllocationController {
 		}
 
 	}
-	@DeleteMapping(path = "/{professor_id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public ResponseEntity<Void> deleteById(@PathVariable(name = "professor_id") Long id) {
-        allocationService.deleteById(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
 
-    @DeleteMapping
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public ResponseEntity<Void> deleteAll() {
-        allocationService.deleteAll();
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+	@DeleteMapping(path = "/{professor_id}")
+	public ResponseEntity<Void> deleteById(@PathVariable(name = "professor_id") Long id) {
+		allocationService.deleteById(id);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
+
+	@DeleteMapping
+	public ResponseEntity<Void> deleteAll() {
+		allocationService.deleteAll();
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
 
 }

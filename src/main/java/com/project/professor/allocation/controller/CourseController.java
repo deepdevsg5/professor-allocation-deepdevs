@@ -36,7 +36,6 @@ public class CourseController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Course> create(@RequestBody Course course) {
         Course createdCourse = courseService.create(course);
         return new ResponseEntity<>(createdCourse, HttpStatus.CREATED);
@@ -55,14 +54,12 @@ public class CourseController {
     }
 
     @DeleteMapping(path = "/{course_id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<Void> deleteById(@PathVariable(name = "course_id") Long id) {
         courseService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<Void> deleteAll() {
         courseService.deleteAll();
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
