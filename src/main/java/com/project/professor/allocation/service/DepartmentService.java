@@ -14,12 +14,9 @@ import com.project.professor.allocation.repository.ProfessorRepository;
 public class DepartmentService {
 
 	private DepartmentRepository repo;
-	private ProfessorRepository profRepo;
 
-	public DepartmentService(DepartmentRepository repo, ProfessorRepository profRepo) {
+	public DepartmentService(DepartmentRepository repo) {
 		this.repo = repo;
-		this.profRepo = profRepo;
-
 	}
 
 	public Department create(Department department) {
@@ -61,14 +58,5 @@ public class DepartmentService {
 	public void deleteAll() {
 		repo.deleteAllInBatch();
 
-	}
-
-	private Department saveInternal(Department department) {
-		department = repo.save(department);
-
-		List<Professor> professors = profRepo.findByDepartmentId(department.getId());
-		department.setProfessors(professors);
-
-		return department;
 	}
 }
