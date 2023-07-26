@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Tag(name = "Course Management Controller")
@@ -43,12 +46,8 @@ public class CourseController {
             return new ResponseEntity<>(course, HttpStatus.OK);
         }
     }
-    
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Course>> findAll() {
-        return ResponseEntity.ok(courseService.findAll());
-    }
 
+    @Operation(summary = "Register Course")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Course> create(@RequestBody Course course) {
         Course createdCourse = courseService.create(course);
@@ -73,6 +72,7 @@ public class CourseController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @Operation(summary = "Delete All Courses")
     @DeleteMapping
     public ResponseEntity<Void> deleteAll() {
         courseService.deleteAll();
