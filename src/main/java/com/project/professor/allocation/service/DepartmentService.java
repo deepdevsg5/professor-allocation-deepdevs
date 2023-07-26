@@ -44,7 +44,7 @@ public class DepartmentService {
 		return department;
 	}
 
-	public List<Department> findAll() {
+	public List<Department> findAll(String name) {
 		List<Department> listDepartment = repo.findAll();
 		return listDepartment;
 	}

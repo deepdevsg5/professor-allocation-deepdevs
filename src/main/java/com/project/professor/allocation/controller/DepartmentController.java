@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.professor.allocation.entity.Department;
@@ -38,9 +39,9 @@ public class DepartmentController {
 	}
 
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Department>> findAll(String name) {
+	public ResponseEntity<List<Department>> findAll(@RequestParam(name = "name", required = false) String name) {
 
-		List<Department> departments = departmentService.findAll();
+		List<Department> departments = departmentService.findAll(name);
 		return new ResponseEntity<List<Department>>(departments, HttpStatus.OK);
 	}
 
