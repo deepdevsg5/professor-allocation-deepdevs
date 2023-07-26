@@ -48,7 +48,7 @@ public class DepartmentRepositoryTest {
 	public void create() {
 		Department department = new Department();
 		department.setId(null);
-		department.setName("Math Department");
+		department.setName("Historia Department");
 		department = departmentRepository.save(department);
 		System.out.println(department);
 	}
