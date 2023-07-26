@@ -31,7 +31,7 @@ public class CourseRepositoryTest {
 	@Test
 	void create() {
 		Course cur1 = new Course();
-		cur1.setName("matematica");
+		cur1.setName("Historia");
 		cur1.setId(null);
 
 		Course cur2 = courseRepository.save(cur1);
