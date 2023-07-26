@@ -27,13 +27,12 @@ public class ProfessorRepositoryTest {
 	public void create() {
 
 		Department dpt = new Department();
-		dpt.setId(1l);
-		dpt.setName("TesteProfessor");
+		dpt.setId(3l);
 
 		Professor professor = new Professor();
 		professor.setId(null);
-		professor.setName("Marcos");
-		professor.setCpf("11111111113");
+		professor.setName("Professor Secreto");
+		professor.setCpf("99996999999");
 		professor.setDepartment(dpt);
 		professor = professorRepository.save(professor);
 		System.out.println(professor);

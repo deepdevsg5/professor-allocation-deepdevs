@@ -30,19 +30,11 @@ public class AllocationRepositoryTest {
 	@Test
 	public void create() {
 		
-		Department dpt = new Department();
-		dpt.setId(2l);
-		//dpt.setName("Teste dpt Alocaçao");
-		
 		Professor professor = new Professor();
-		//professor.setCpf("0123456");
-		professor.setId(1l);
-		//professor.setName("Teste Prof alocacao");
-		//professor.setDepartment(dpt);
+		professor.setId(4l);
 
 		Course course = new Course();
-		course.setId(1l);
-		//course.setName("teste course alocacao");
+		course.setId(3l);
 
 		Allocation alloc1 = new Allocation();
 		alloc1.setDayOfWeek(DayOfWeek.FRIDAY);
