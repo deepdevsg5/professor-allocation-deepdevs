@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+@Tag(name = "Course Management Controller")
 @RestController
 @RequestMapping(path = "/courses")
 public class CourseController {
@@ -20,9 +23,15 @@ public class CourseController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Course>> findAll(@RequestParam(name = "name") String name) {
-        List<Course> courses = courseService.findAll();
+    public ResponseEntity<List<Course>> findByName(@RequestParam(name = "name", required = false) String name) {
+        List<Course> courses;
+        if (name != null && !name.isEmpty()) {
+            courses = courseService.findByName(name);
+        } else {
+            courses = courseService.findAll();
+        }
         return new ResponseEntity<>(courses, HttpStatus.OK);
+        
     }
 
     @GetMapping(path = "/{course_id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -33,6 +42,11 @@ public class CourseController {
         } else {
             return new ResponseEntity<>(course, HttpStatus.OK);
         }
+    }
+    
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Course>> findAll() {
+        return ResponseEntity.ok(courseService.findAll());
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -65,4 +79,3 @@ public class CourseController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
-
