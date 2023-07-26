@@ -100,8 +100,8 @@ public class AllocationController {
 	    @ApiResponse(responseCode = "204", description = "Allocation deleted successfully"),
 	})
 	@Operation(summary = " Delete Allocation By ID")
-	@DeleteMapping(path = "/{professor_id}")
-	public ResponseEntity<Void> deleteById(@PathVariable(name = "professor_id") Long id) {
+	@DeleteMapping(path = "/{allocation_id}")
+	public ResponseEntity<Void> deleteById(@PathVariable(name = "allocation_id") Long id) {
 		allocationService.deleteById(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
