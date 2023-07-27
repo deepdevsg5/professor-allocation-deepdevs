@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.project.professor.allocation.entity.Allocation;
 import com.project.professor.allocation.service.AllocationService;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -58,13 +60,14 @@ public class AllocationController {
 	
 	@Operation(summary = "Register Allocation")
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Allocation> create(@RequestBody Allocation alloc) {
-
+	public ResponseEntity<Allocation> create(@RequestBody Allocation allocation) {
+			
+			
 		try {
 
-			Allocation allocation = allocationService.create(alloc);
+			Allocation savedAllocation = allocationService.create(allocation);
 
-			return new ResponseEntity<Allocation>(allocation, HttpStatus.CREATED);
+			return new ResponseEntity<Allocation>(savedAllocation, HttpStatus.CREATED);
 
 		} catch (Exception e) {
 

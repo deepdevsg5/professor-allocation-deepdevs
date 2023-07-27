@@ -62,5 +62,12 @@ public class Professor {
 	public String toString() {
 		return "Professor [id=" + id + ", name=" + name + ", cpf=" + cpf + ", department=" + department + "]";
 	}
+	
+	public void setIdDepartment(Long departmentId) {
+		Department department = new Department();
+		department.setId(departmentId);
+		this.setDepartment(department);
+	}
+	
 
 }

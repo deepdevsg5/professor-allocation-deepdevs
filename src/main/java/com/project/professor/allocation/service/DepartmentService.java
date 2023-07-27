@@ -6,9 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.project.professor.allocation.entity.Department;
-import com.project.professor.allocation.entity.Professor;
 import com.project.professor.allocation.repository.DepartmentRepository;
-import com.project.professor.allocation.repository.ProfessorRepository;
 
 @Service
 public class DepartmentService {

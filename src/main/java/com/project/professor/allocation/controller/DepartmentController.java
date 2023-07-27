@@ -18,71 +18,94 @@ import org.springframework.web.bind.annotation.RestController;
 import com.project.professor.allocation.entity.Department;
 import com.project.professor.allocation.service.DepartmentService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+@Tag(name = "Department Management Controller")
 @RestController
 @RequestMapping(path = "/departments")
 public class DepartmentController {
 
-	private DepartmentService departmentService;
+    private final DepartmentService departmentService;
 
-	public DepartmentController(DepartmentService departmentService) {
-		this.departmentService = departmentService;
-	}
+    public DepartmentController(DepartmentService departmentService) {
+        this.departmentService = departmentService;
+    }
 
-	@GetMapping(path = "/{department_id})", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Department> findById(@PathVariable(name = "department_id") Long id) {
-		Department department = departmentService.findById(id);
-		if (department == null) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		} else {
-			return new ResponseEntity<>(department, HttpStatus.OK);
-		}
-	}
+    @Operation(summary = "Search All Departments")
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Department>> findAll(@RequestParam(name = "name", required = false) String name) {
+        List<Department> departments = departmentService.findAll(name);
+        return ResponseEntity.ok(departments);
+    }
 
-	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Department>> findAll(@RequestParam(name = "name", required = false) String name) {
+    @Operation(summary = "Search Department by ID")
+    @GetMapping(path = "/{department_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Department> findById(@PathVariable(name = "department_id") Long id) {
+        Department department = departmentService.findById(id);
+        if (department == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(department, HttpStatus.OK);
+        }
+    }
 
-		List<Department> departments = departmentService.findAll(name);
-		return new ResponseEntity<List<Department>>(departments, HttpStatus.OK);
-	}
+    @Operation(summary = "Register Department")
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Department> create(@RequestBody Department department) {
+        try {
+            Department createdDepartment = departmentService.create(department);
+            return new ResponseEntity<>(createdDepartment, HttpStatus.CREATED);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
 
-	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Department> create(@RequestBody Department dpt) {
-		try {
-			Department department = departmentService.create(dpt);
-			return new ResponseEntity<Department>(department, HttpStatus.CREATED);
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
-	}
+    @Operation(summary = "Update Department")
+    @PutMapping(path = "/{department_id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Department updated successfully"),
+        @ApiResponse(responseCode = "404", description = "Department not found"),
+        @ApiResponse(responseCode = "400", description = "Invalid request body")
+    })
+    public ResponseEntity<Department> update(@PathVariable(name = "department_id") Long id,
+                                             @RequestBody Department department) {
+        department.setId(id);
+        try {
+            Department updatedDepartment = departmentService.update(department);
+            if (updatedDepartment == null) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            } else {
+                return new ResponseEntity<>(updatedDepartment, HttpStatus.OK);
+            }
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
 
-	@PutMapping(path = "/{department_id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Department> update(@PathVariable(name = "department_id") Long id,
-			@RequestBody Department department) {
-		try {
-			department.setId(id);
-			department = departmentService.update(department);
+    @ApiResponses({
+        @ApiResponse(responseCode = "204", description = "Department deleted successfully"),
+        @ApiResponse(responseCode = "404", description = "Department not found")
+    })
+    @Operation(summary = "Delete Department by ID")
+    @DeleteMapping(path = "/{department_id}")
+    public ResponseEntity<Void> deleteById(@PathVariable(name = "department_id") Long id) {
+        if (departmentService.findById(id) == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        departmentService.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 
-			if (department == null) {
-				return new ResponseEntity<Department>(HttpStatus.NOT_FOUND);
-			} else {
-				return new ResponseEntity<Department>(department, HttpStatus.OK);
-			}
-
-		} catch (Exception e) {
-
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
-	}
-
-	@DeleteMapping(path = "/{department_id}")
-	public ResponseEntity<Void> deleteById(Long id) {
-		departmentService.deleteById(id);
-		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-	}
-
-	@DeleteMapping
-	public ResponseEntity<Void> deleteAll() {
-		departmentService.deleteAll();
-		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-	}
+    @ApiResponses({
+        @ApiResponse(responseCode = "204", description = "All Departments deleted successfully")
+    })
+    @Operation(summary = "Delete All Departments")
+    @DeleteMapping
+    public ResponseEntity<Void> deleteAll() {
+        departmentService.deleteAll();
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }
