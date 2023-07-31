@@ -14,9 +14,7 @@ public class DepartmentService {
 	private DepartmentRepository repo;
 
 	public DepartmentService(DepartmentRepository repo) {
-
 		this.repo = repo;
-
 	}
 
 	public Department create(Department department) {
@@ -44,7 +42,7 @@ public class DepartmentService {
 		return department;
 	}
 
-	public List<Department> findAll() {
+	public List<Department> findAll(String name) {
 		List<Department> listDepartment = repo.findAll();
 		return listDepartment;
 	}
@@ -54,9 +52,9 @@ public class DepartmentService {
 			repo.deleteById(id);
 		}
 	}
-	
+
 	public void deleteAll() {
 		repo.deleteAllInBatch();
-		
+
 	}
 }

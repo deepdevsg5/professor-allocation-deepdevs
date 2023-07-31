@@ -5,15 +5,22 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+
 
 @Entity
 public class Department {
 
+	@JsonProperty(access = Access.READ_ONLY)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Schema(example = "Dpt Fisica", type = "string")
 	@Column(name = "name", nullable = false)
 	private String name;
 	
@@ -31,12 +38,11 @@ public class Department {
 
 	public void setName(String name) {
 		this.name = name;
-	
+
 	}
 
 	@Override
 	public String toString() {
 		return "Department [id=" + id + ", name=" + name + "]";
 	}
-
 }
