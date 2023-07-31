@@ -6,15 +6,21 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+
 
 @Entity
 public class Course {
 
-	
+	@JsonProperty(access = Access.READ_ONLY)
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	
+	@Schema(example = "Fisica", type = "string")
 	@Column(name = "name", nullable = false)
 	private String name;
 
