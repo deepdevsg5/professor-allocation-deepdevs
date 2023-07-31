@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 
 @Entity
 public class Department {
@@ -18,6 +20,7 @@ public class Department {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Schema(example = "Dpt Fisica", type = "string")
 	@Column(name = "name", nullable = false)
 	private String name;
 	
