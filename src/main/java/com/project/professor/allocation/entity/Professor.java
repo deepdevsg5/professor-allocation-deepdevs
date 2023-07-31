@@ -8,20 +8,31 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.media.Schema.AccessMode;
+
 
 @Entity
 public class Professor {
 
+	@JsonProperty(access = Access.READ_ONLY)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	
+	@Schema(example = "Pedro", type = "string")
 	@Column(name = "name", nullable = false)
 	private String name;
 
+	@Schema(example = "01111111111", type = "string")
 	@Column(name = "cpf", unique = true, nullable = false)
 	private String cpf;
 
+	@Schema(allOf = Department.class, accessMode = AccessMode.READ_ONLY)
+	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	@ManyToOne(optional = false)
 	@JoinColumn(nullable = false)
 	private Department department;
