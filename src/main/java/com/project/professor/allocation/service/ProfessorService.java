@@ -44,9 +44,13 @@ public class ProfessorService {
 		return professor;
 	}
 
-	public List<Professor> findAll() {
-		List<Professor> professorList = repo.findAll();
-		return professorList;
+	public List<Professor> findAll(String name) {
+		if(name == null) {
+			List<Professor> professorList = repo.findAll();
+			return professorList;
+		} else {
+			return repo.findByNameContaining(name);
+		}
 	}
 
 	public void deleteById(Long id) {

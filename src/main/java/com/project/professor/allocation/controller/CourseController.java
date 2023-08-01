@@ -75,7 +75,8 @@ public class CourseController {
     @Operation(summary = "Delete Course by ID")
     @DeleteMapping(path = "/{course_id}")
     public ResponseEntity<Void> deleteById(@PathVariable(name = "course_id") Long id) {
-        courseService.deleteById(id);
+    	// Ajustar ou aqui ou no service
+    	courseService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

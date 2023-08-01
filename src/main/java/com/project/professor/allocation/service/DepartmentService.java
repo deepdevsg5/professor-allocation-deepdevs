@@ -43,8 +43,12 @@ public class DepartmentService {
 	}
 
 	public List<Department> findAll(String name) {
-		List<Department> listDepartment = repo.findAll();
-		return listDepartment;
+		if(name == null) {
+			List<Department> listDepartment = repo.findAll();
+			return listDepartment;
+		} else {
+			return repo.findByNameContaining(name);
+		}
 	}
 
 	public void deleteById(Long id) {

@@ -47,6 +47,7 @@ public class CourseService {
 		}
 	}
 
+	// Ajustar ou aqui ou no controller
 	public void deleteById(Long id) {
 		repo.deleteById(id);
 	}
