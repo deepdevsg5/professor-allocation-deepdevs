@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.professor.allocation.entity.Professor;
@@ -35,8 +36,8 @@ public class ProfessorController {
 
     @Operation(summary = "Search All Professors")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Professor>> findAll() {
-        List<Professor> professors = professorService.findAll();
+    public ResponseEntity<List<Professor>> findAll(@RequestParam(required = false) String name) {
+        List<Professor> professors = professorService.findAll(name);
         return ResponseEntity.ok(professors);
     }
 
@@ -65,12 +66,12 @@ public class ProfessorController {
     @Operation(summary = "Update Professor")
     @PutMapping(path = "/{professor_id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiResponses({
-        @ApiResponse(responseCode = "200", description = "Professor updated successfully"),
-        @ApiResponse(responseCode = "404", description = "Professor not found"),
-        @ApiResponse(responseCode = "400", description = "Invalid request body")
+            @ApiResponse(responseCode = "200", description = "Professor updated successfully"),
+            @ApiResponse(responseCode = "404", description = "Professor not found"),
+            @ApiResponse(responseCode = "400", description = "Invalid request body")
     })
     public ResponseEntity<Professor> update(@PathVariable(name = "professor_id") Long id,
-                                            @RequestBody Professor professor) {
+            @RequestBody Professor professor) {
         professor.setId(id);
         try {
             Professor updatedProfessor = professorService.update(professor);
@@ -85,8 +86,8 @@ public class ProfessorController {
     }
 
     @ApiResponses({
-        @ApiResponse(responseCode = "204", description = "Professor deleted successfully"),
-        @ApiResponse(responseCode = "404", description = "Professor not found")
+            @ApiResponse(responseCode = "204", description = "Professor deleted successfully"),
+            @ApiResponse(responseCode = "404", description = "Professor not found")
     })
     @Operation(summary = "Delete Professor by ID")
     @DeleteMapping(path = "/{professor_id}")
@@ -99,7 +100,7 @@ public class ProfessorController {
     }
 
     @ApiResponses({
-        @ApiResponse(responseCode = "204", description = "All Professors deleted successfully")
+            @ApiResponse(responseCode = "204", description = "All Professors deleted successfully")
     })
     @Operation(summary = "Delete All Professors")
     @DeleteMapping
