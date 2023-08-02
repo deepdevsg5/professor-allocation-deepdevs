@@ -55,22 +55,22 @@ public class ProfessorService {
 			repo.deleteById(id);
 		}
 	}
-	
+
 	public void deleteAll() {
 		repo.deleteAllInBatch();
-		
+
 	}
-	
+
 	private Professor saveInternal(Professor professor) {
-		if (professor.getCpf().isBlank() || professor.getCpf().isEmpty()) {
+		if (professor.getCpf().equals("") || professor.getCpf().isEmpty()) {
 			throw new RuntimeException("Cpf não pode esta em branco");
-		}else {
+		} else {
 			Professor savedProfessor = repo.save(professor);
-			
+
 			Long departamentId = savedProfessor.getDepartment().getId();
 			Department department = departmentService.findById(departamentId);
 			savedProfessor.setDepartment(department);
-			
+
 			return savedProfessor;
 		}
 	}
