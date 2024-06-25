@@ -1,6 +1,6 @@
 # Professor Allocation DeepDevs
 
-Este é o repositório do projeto Professor Allocation DeepDevs, Api desenvolvida pelos integrantes Bruno Dutra, Jacob Berenstein, Fabio Queiroz e [Pablo Jorge](https://www.linkedin.com/in/pjmaciel/). 
+Este é o repositório do projeto Professor Allocation DeepDevs, Api desenvolvida pelos integrantes Bruno Dutra, Jacob Berenstein, [Fábio Queiroz](https://www.linkedin.com/in/antoniofabioqueiroz/) e [Pablo Jorge](https://www.linkedin.com/in/pjmaciel/). 
 
 # Design da Aplicação
 
